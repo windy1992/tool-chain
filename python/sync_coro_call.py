@@ -41,9 +41,9 @@ class SyncCoroCall(object):
     async def _run_next(self):
         while self._queue:
             task = self._queue[0]
-            # 注意 popleft 调用应在 await 之前，避免竞争
-            self._queue.popleft()
             await task()
+            self._queue.popleft()
+
         
 
 
